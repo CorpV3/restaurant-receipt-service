@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: corpv3/restaurant-receipt-service
+  IMAGE_NAME: shadrachdoc/restaurant-receipt-service
 
 jobs:
   test:
@@ -52,7 +52,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
       - name: Update Helm values
         run: |
-          git clone https://x-access-token:${{ secrets.INFRA_REPO_TOKEN }}@github.com/CorpV3/restaurant-infrastructure.git
+          git clone https://x-access-token:${{ secrets.INFRA_REPO_TOKEN }}@github.com/shadrachdoc/restaurant-infrastructure.git
           cd restaurant-infrastructure
           TAG=$(echo ${{ github.sha }} | cut -c1-7)
           yq e -i ".receiptService.image.tag = \"$TAG\"" helm/restaurant-system/values.yaml
